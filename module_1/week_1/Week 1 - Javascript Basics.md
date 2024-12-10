@@ -21,7 +21,7 @@ By the end of this week, students should be able to:
 
 https://javascript.info/
 
-2.1-2.13
+2.1, 2.2, 2.4, 2.5, 2.8, 2.9, 2.10, 2.13
 
 
 ---
