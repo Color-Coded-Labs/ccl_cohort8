@@ -17,7 +17,7 @@ By the end of this week, students should be able to:
 - [ ] Differentiate between different data types and understand their usage.
 - [ ] Apply basic control structures for conditional operations and looping.
 
-#### Activities and Assignments
+#### Homework
 
 https://javascript.info/
 
