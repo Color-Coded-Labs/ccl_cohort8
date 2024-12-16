@@ -4,8 +4,6 @@
 - [HTML Forms](https://developer.mozilla.org/en-US/docs/Learn/Forms)
 - [CSS Flexbox Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
-INCLUDE MOST COMMON HTML / CSS ELEMENTS LINK
-
 #### Topics
 - Basics of HTML: Elements, Tags, and Attributes.
 - Basic structure of a web page using HTML.
