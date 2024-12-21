@@ -1,4 +1,4 @@
-### Week 5: Git/GitHub and Command Line Interface (CLI)
+### Week 3: Git/GitHub and Command Line Interface (CLI)
 
 #### Resources
 - [Git Basics Tutorial](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics)
@@ -37,14 +37,22 @@ By the end of this week, students should be able to:
 - **Activity**: Complete a series of tasks using the CLI to navigate the file system, create and edit files, and utilize Git commands.
 - **Deliverables**: A log of CLI commands used to perform tasks, along with a brief explanation of each command.
 
-**Week 5 Project: Personal GitHub Repository Setup**
-- **Objective**: Set up a personal project on GitHub using CLI and Git.
+**Week 3 Homework: GitHub Repository Setup and Terminal Commands**
+- **Objective**: Practice using Git and the terminal to manage a GitHub repository.
+
 - **Step-by-Step Guide**:
-  - Initialize a new project or use an existing one.
-  - Create a new repository on GitHub.
-  - Use Git commands to connect the local project to the GitHub repository.
-  - Make regular commits and push updates to GitHub.
-- **Deliverables**: A link to the GitHub repository containing the project with a well-documented README file.
+  1. Create a new repository on GitHub (no need to initialize it with a README or other files).
+  2. Clone the repository to your local machine using the terminal.
+  3. Inside the cloned repository, create a file (either `.txt` or `.md`) that lists the terminal commands we learned this week (e.g., `ls`, `cd`, etc.).
+  4. Use Git to:
+     - Add the file to the staging area.
+     - Commit the changes with a meaningful commit message.
+     - Push the changes to the GitHub repository.
+  5. Copy the repository URL from GitHub.
+
+- **Deliverables**: Submit the URL of your GitHub repository containing the file with terminal commands to the LMS.
+
+
 
 ---
 
