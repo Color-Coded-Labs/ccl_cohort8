@@ -1,137 +1,572 @@
-# Basics of HTML: Elements, Tags, and Attributes
+# HTML
+## What is HTML?
 
-HTML (HyperText Markup Language) is the standard language for creating web pages. It describes the structure of a web page using a series of elements, tags, and attributes.
+HTML (Hypertext Markup Language) is the standard markup language for documents
+designed to be displayed in a web browser. It helps structure the content and
+present it on the web.
 
-## Understanding HTML Elements
+## Why Should I Learn HTML?
 
-An HTML element typically consists of a start tag and an end tag, with the content inserted in between. For example, `<p>Hello World!</p>` is a paragraph element.
+HTML is the backbone of web pages. Learning HTML is essential for anyone
+interested in web development or design, as it's the basic building block for
+creating websites.
 
-### Common HTML Elements
+## Document Structure
 
-- `<p>` for paragraphs
-- `<h1>`, `<h2>`, ..., `<h6>` for headings
-- `<div>` for divisions or sections
-- `<span>` for inline elements
-- `<img>` for images
-- `<a>` for hyperlinks
+An HTML document follows a specific structure that includes various elements for
+organizing and presenting content. Here's an expanded explanation of each
+element:
 
-## HTML Tags
+- **`<!DOCTYPE html>`**: This declaration specifies the document type and
+  version of HTML being used. It ensures that the browser renders the document
+  correctly.
 
-Tags are used to mark the start and end of an HTML element. They are enclosed in angle brackets. For example, `<div>` is the start tag and `</div>` is the end tag for a division element.
+- **`<html>`**: The `<html>` element serves as the root element of the HTML
+  document. It contains all the other elements and represents the entire content
+  of the webpage.
 
-### Self-Closing Tags
+- **`<head>`**: The `<head>` element is a container for meta-information about
+  the document. It doesn't directly display any content on the webpage but
+  includes elements like `<title>`, `<meta>`, and `<link>`. Here are some
+  commonly used elements within the `<head>` section:
 
-Some elements, like the image (`<img>`) and break (`<br>`) tags, don't contain content and are therefore self-closing.
-
-## Attributes in HTML
-
-Attributes provide additional information about HTML elements. They are always specified in the start tag and usually come in name/value pairs like `name="value"`.
-
-### Examples of Attributes
-
-- `href` in anchor tags (`<a>`) for linking URLs.
-- `src` in image tags (`<img>`) for the source of the image.
-- `alt` in image tags for alternative text.
-
-## Basic Structure of a Web Page
-
-An HTML document has a structured format with essential elements:
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Page Title</title>
-</head>
-<body>
-    <h1>This is a Heading</h1>
-    <p>This is a paragraph.</p>
-</body>
-</html>
-```
-
-- `<!DOCTYPE html>`: Defines the document type and version of HTML.
-- `<html>`: The root element of an HTML page.
-- `<head>`: Contains meta-information about the document like `<title>`.
-- `<body>`: Contains the contents of the web page.
-
-## Summary
-
-Understanding the basics of HTML is fundamental for web development. HTML elements, tags, and attributes are the building blocks of a web page, defining its structure and content. By mastering these basics, you can create a wide range of web page layouts and content structures.
-
----
-
-# Basic Structure of a Web Page Using HTML
-
-Creating a well-structured web page is essential in web development. HTML provides the framework to layout and organize content on a web page effectively.
-
-## HTML Document Structure
-
-Every HTML document follows a basic structure that includes the following key components:
-
-### Document Type Declaration
-
-- `<!DOCTYPE html>`: Declares the document type and HTML version.
-
-### HTML Element
-
-- `<html>`: The root element that wraps all the content on the entire web page.
-
-### Head Section
-
-- `<head>`: Contains meta-information about the HTML document, such as its title and links to scripts and stylesheets.
+  - **`<title>`**: The `<title>` element sets the title of the webpage, which
+    appears in the browser's title bar or tab.
 
     ```html
     <head>
-        <title>Page Title</title>
-        <!-- Link to external CSS file -->
-        <link rel="stylesheet" href="styles.css">
-        <!-- Link to external JavaScript file -->
-        <script src="script.js"></script>
+      <title>My Web Page</title>
     </head>
     ```
 
-### Body Section
-
-- `<body>`: Contains all the contents of an HTML document, such as text, images, links, etc.
+  - **`<meta>`**: The `<meta>` element provides metadata about the HTML
+    document. It includes information such as character encoding, author,
+    description, keywords, and viewport settings. Here's an example of a
+    viewport meta tag:
 
     ```html
-    <body>
-        <h1>Welcome to My Webpage</h1>
-        <p>This is a paragraph of text.</p>
-        <img src="image.jpg" alt="Description">
-        <!-- Other HTML elements -->
-    </body>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
     ```
 
-## Creating a Simple HTML Page
+    The above `<meta>` tag sets the initial scale and width of the webpage to
+    match the device's screen width.
 
-Here is an example of a simple HTML page structure:
+- **`<body>`**: The `<body>` element contains the visible content of the
+  webpage, such as text, images, links, and other HTML elements. It represents
+  the main content area that users see and interact with.
 
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-    <title>My First Web Page</title>
-</head>
-<body>
-    <h1>Hello, World!</h1>
-    <p>Welcome to my first web page. Here's a paragraph of text.</p>
-    <img src="example.jpg" alt="Example Image">
-    <!-- Additional content goes here -->
-</body>
+  <head>
+    <title>My Web Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <!-- Visible content goes here -->
+  </body>
 </html>
 ```
 
-- **Title**: The `<title>` tag sets the title of the web page (shown in the browser's title bar or tab).
-- **Headings and Paragraphs**: The `<h1>` and `<p>` tags are used for headings and paragraphs, respectively.
-- **Images**: The `<img>` tag is used to embed images in the webpage.
+## Inline vs Block Elements
 
-## Summary
+HTML elements can be categorized as either inline or block elements, each with
+different rendering and layout behavior. Here are more examples of commonly used
+inline and block elements:
 
-The basic structure of a web page in HTML involves setting up the `<!DOCTYPE html>`, `<html>`, `<head>`, and `<body>` elements. These foundational elements form the scaffold for adding more complex and diverse content to build fully-featured web pages.
+**Inline Elements**: Inline elements do not start on a new line and only occupy
+as much width as necessary.
+
+- `<span>`: The `<span>` element is an inline container used to group inline
+  elements and apply styles or scripts to specific sections of text.
+
+```html
+This is an <span>inline</span> element.
+```
+
+- `<a>`: The `<a>` element creates a hyperlink to another webpage or a specific
+  location within the same webpage.
+
+```html
+Visit our <a href="https://www.example.com">website</a> for more information.
+```
+
+**Block Elements**: Block elements start on a new line and occupy the full width
+available.
+
+- `<div>`: The `<div>` element is a generic container used to group and style
+  other HTML elements.
+
+```html
+<div>This is a block element.</div>
+```
+
+- `<h1>` to `<h6>`: Heading elements represent section headings of different
+  levels, with `<h1>` being the highest and `<h6>` being the lowest.
+
+```html
+<h1>Main Heading</h1>
+<h2>Subheading</h2>
+```
+
+- `<p>`: The `<p>` element represents a paragraph of text.
+
+```html
+<p>This is a paragraph.</p>
+```
+
+**Block Elements:**
+
+- `<div>`
+- `<p>`
+- `<h1>` to `<h6>`
+- `<ul>` (unordered list)
+- `<ol>` (ordered list)
+- `<li>` (list item)
+- `<table>`
+- `<tr>` (table row)
+- `<td>` (table cell)
+- `<th>` (table header cell)
+- `<form>`
+- `<blockquote>`
+- `<pre>`
+- `<address>`
+- `<header>`
+- `<nav>`
+- `<main>`
+- `<article>`
+- `<section>`
+- `<aside>`
+- `<footer>`
+- `<figure>`
+- `<figcaption>`
+- `<fieldset>`
+
+**Inline Elements:**
+
+- `<span>`
+- `<a>`
+- `<strong>` or `<b>` (bold text)
+- `<em>` or `<i>` (italicized text)
+- `<code>`
+- `<time>` (date or time)
+- `<img>`
+- `<input>`
+- `<label>`
+- `<button>`
+- `<select>`
+- `<option>`
+- `<textarea>`
+
+## Semantic HTML
+
+Semantic HTML elements provide meaning and structure to the content, making it
+more understandable for both humans and machines. They convey the purpose and
+role of different sections of a webpage. Here are seven examples of semantic
+HTML elements:
+
+- `<header>`: Represents the introductory content at the top of a webpage or a
+  section.
+- `<nav>`: Defines a section of navigation links.
+- `<article>`: Represents an independent, self-contained piece of content, such
+  as a blog post or news article.
+- `<section>`: Represents a standalone section of content.
+- `<aside>`: Defines content that is tangentially related to the main content,
+  such as sidebars or pull quotes.
+- `<footer>`: Represents the footer or closing section of a webpage or a
+  section.
+- `<main>`: Defines the main content area of the document.
+
+Here's an example that demonstrates the usage of these semantic elements
+together:
+
+```html
+<header>
+  <h1>Website Title</h1>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <article>
+    <header>
+      <h2>Article Title</h2>
+    </header>
+    <section>
+      <p>Content of the article...</p>
+    </section>
+    <footer>
+      <p>Article footer.</p>
+    </footer>
+  </article>
+
+  <aside>
+    <h3>Related Articles</h3>
+    <ul>
+      <li><a href="#">Article 1</a></li>
+      <li><a href="#">Article 2</a></li>
+      <li><a href="#">Article 3</a></li>
+    </ul>
+  </aside>
+</main>
+
+<footer>
+  <p>&copy; 2023 My Website. All rights reserved.</p>
+</footer>
+```
+
+## Headings and Paragraphs
+
+Headings and paragraphs are fundamental building blocks of any web page.
+Headings are used to define the structure and layout of your content. Paragraphs
+are used for regular text.
+
+HTML headings are defined with the `<h1>` to `<h6>` tags, with `<h1>` being the
+largest and `<h6>` the smallest.
+
+```html
+<h1>This is a heading level 1</h1>
+<h2>This is a heading level 2</h2>
+<h3>This is a heading level 3</h3>
+<p>This is a paragraph.</p>
+```
+
+### Lists
+
+There are two types of lists in HTML: unordered lists and ordered lists. An
+unordered list is a collection of items that do not have a numerical order. This
+is created using the `<ul>` element. An ordered list is a collection of items
+that are numbered in order. This is created using the `<ol>` element.
+
+```html
+<!-- Unordered list -->
+<ul>
+  <li>Apple</li>
+  <li>Banana</li>
+  <li>Cherry</li>
+</ul>
+
+<!-- Ordered list -->
+<ol>
+  <li>First item</li>
+  <li>Second item</li>
+  <li>Third item</li>
+</ol>
+```
+
+## Images
+
+The `<img>` tag is used to embed images in a document. The `src` attribute
+contains the image URL and is mandatory. The `alt` attribute provides
+alternative text for the image if it cannot be displayed.
+
+```html
+<img src="url-of-your-image.jpg" alt="Description of the image" />
+```
+
+## Links
+
+Links are used to navigate between pages on the internet. The `<a>` tag is used
+to create hyperlinks.
+
+Basic link example:
+
+```html
+<a href="path-to-file.html">This is a link</a>
+```
+
+Open link in a new tab:
+
+```html
+<a href="https://example.com" target="_blank">Open in new tab</a>
+```
+
+## Forms and Inputs
+
+Forms are essential for collecting data from the user. The `<form>` element is
+used to create a form, and within this, various input elements and buttons can
+be placed.
+
+**Text Input**: For general text input.
+
+```html
+<input type="text" name="username" placeholder="Enter your username" />
+```
+
+**Password Input**: For password entry fields. Characters are obscured.
+
+```html
+<input type="password" name="password" placeholder="Enter your password" />
+```
+
+**Radio Buttons**: Let the user select one option from a set.
+
+```html
+<input type="radio" name="gender" value="male" /> Male
+<input type="radio" name="gender" value="female" /> Female
+```
+
+**Checkboxes**: Allow the user to select multiple options.
+
+```html
+<input type="checkbox" name="option1" value="Option 1" /> Option 1
+<input type="checkbox" name="option2" value="Option 2" /> Option 2
+```
+
+**Submit Button**: Used to submit a form.
+
+```html
+<input type="submit" value="Submit" />
+```
+
+**Email Input**: For email addresses.
+
+```html
+<input type="email" name="email" placeholder="Enter your email" />
+```
+
+**Number Input**: For numeric input.
+
+```html
+<input type="number" name="quantity" min="1" max="10" />
+```
+
+**Date Input**: For date input.
+
+```html
+<input type="date" name="birthday" />
+```
+
+## Labels
+
+The `<label>` element is an essential part of forms. It is used to add text next
+to an input element, improving usability and accessibility. The `for` attribute
+in the `<label>` should have the same value as the `id` attribute of the input
+it's associated with. This allows users to click the label to focus/select the
+input element.
+
+Here's how you can use the `<label>` element in conjunction with different input
+types:
+
+```html
+<!-- Text input with label -->
+<label for="username">Username:</label>
+<input
+  type="text"
+  id="username"
+  name="username"
+  placeholder="Enter your username"
+/>
+
+<!-- Password input with label -->
+<label for="password">Password:</label>
+<input
+  type="password"
+  id="password"
+  name="password"
+  placeholder="Enter your password"
+/>
+
+<!-- Radio buttons with labels -->
+<label for="male">Male</label>
+<input type="radio" id="male" name="gender" value="male" />
+<label for="female">Female</label>
+<input type="radio" id="female" name="gender" value="female" />
+
+<!-- Checkbox with label -->
+<label for="option1">Option 1</label>
+<input type="checkbox" id="option1" name="option1" value="Option 1" />
+
+<!-- Number input with label -->
+<label for="quantity">Quantity (between 1 and 10):</label>
+<input type="number" id="quantity" name="quantity" min="1" max="10" />
+```
+
+Using labels not only makes the form more user-friendly but also makes it more
+accessible to screen readers, improving the overall accessibility of your
+webpage.
+
+## Tables
+
+Tables are used to organize data into rows and columns. They are created using
+the `<table>` element.
+
+```html
+<table>
+  <tr>
+    <th>Header 1</th>
+    <th>Header 2</th>
+  </tr>
+  <tr>
+    <td>Row 1, Cell 1</td>
+    <td>Row 1, Cell 2</td>
+  </tr>
+  <tr>
+    <td>Row 2, Cell 1</td>
+    <td>Row 2, Cell 2</td>
+  </tr>
+</table>
+```
+
+Here, `<tr>` defines a table row, `<th>` defines a header cell, and `<td>`
+defines a standard cell in the table. This table is used to represent data in a
+structured format, which can be particularly useful for displaying tabular data
+like schedules, statistics, or lists.
 
 ---
+# CSS
+
+## What is CSS?
+
+CSS (Cascading Style Sheets) is a stylesheet language used to describe the
+presentation of a document written in HTML. It allows you to control the layout,
+colors, fonts, and other visual aspects of web pages.
+
+## Why Should I Learn CSS?
+
+CSS is essential for web development because it provides the styling and
+aesthetic aspects of a webpage. It makes websites visually appealing and
+improves the user experience.
+
+## How to Apply Styles
+
+**Inline**: Directly within an HTML element using the `style` attribute.
+
+```html
+<p style="color: red;">This is an inline style.</p>
+```
+
+**Internal**: Within the `<style>` tags in the HTML `<head>` section.
+
+```html
+<head>
+  <style>
+    p {
+      color: blue;
+    }
+  </style>
+</head>
+```
+
+**External**: In a separate .css file that is linked to the HTML file.
+
+```html
+<link rel="stylesheet" href="styles.css" />
+```
+
+## Selectors
+
+Selectors are patterns that match against elements in an HTML document, used to
+apply styles.
+
+**Type Selector**: Matches elements by node name.
+
+    ```css
+    p {
+      color: green;
+    }
+    ```
+
+**Class Selector**: Matches elements by class attribute.
+
+    ```css
+    .highlight {
+      font-weight: bold;
+    }
+    ```
+
+**ID Selector**: Matches a single element by its ID attribute.
+
+    ```css
+    #navbar {
+      background-color: black;
+    }
+    ```
+
+**Specificity**: Determines which CSS rule is applied when multiple rules could
+apply to an element. It is calculated based on the different categories of
+selectors.
+
+- Inline styles have the highest specificity.
+- ID selectors have higher specificity than class selectors.
+- Class selectors have higher specificity than type selectors.
+
+### Common CSS Properties
+
+**Color**: Sets the text color.
+
+```css
+p {
+  color: red;
+}
+```
+
+**Text Alignment**: Aligns the text within an element.
+
+```css
+h1 {
+  text-align: center;
+}
+```
+
+**Font Size and Family**: Sets the font size and type for text.
+
+```css
+.text {
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+}
+```
+
+**Height and Width**: Sets the height and width of an element.
+
+```css
+.box {
+  height: 100px;
+  width: 200px;
+}
+```
+
+**Border and Border Radius**: Sets the border style and radius (rounded
+corners).
+
+```css
+.rounded-border {
+  border: 2px solid blue;
+  border-radius: 10px;
+}
+```
+
+## Box Model
+
+The CSS Box Model is the foundation of layout on the Web — each element is
+represented as a rectangular box, with the box's content, padding, border, and
+margin built up around one another like the layers of an onion.
+
+- **Content**: The actual content of the box, where text and images appear.
+- **Padding**: Clears an area around the content inside the border. It's
+  transparent.
+- **Border**: A border that goes around the padding and content.
+- **Margin**: Clears an area outside the border.
+
+Use padding when you want to create space within the element, and margin when
+you want to create space between different elements.
+
+```css
+.div {
+  content: "content";
+  padding: 10px;
+  border: 2px solid black;
+  margin: 20px;
+}
+```
 
 # Utilizing Flexbox in CSS to Arrange Elements
 
@@ -219,33 +654,4 @@ Forms are crucial in web interaction, allowing users to enter data that can be s
         display: block;
     }
     ```
-
-# Introduction to CSS: Selectors, Properties, and Values
-
-CSS (Cascading Style Sheets) is used for styling HTML documents. It controls the layout, colors, fonts, and overall appearance of a web page.
-
-## CSS Basics
-
-### Selectors
-
-- **Selectors** determine which HTML elements to style.
-    - Example: `p`, `.class`, `#id`
-
-### Properties and Values
-
-- **Properties** are the aspects of the element you want to change (e.g., color, margin, font-size).
-- **Values** are the settings for the chosen properties.
-
-    ```css
-    p {
-        color: blue;
-        font-size: 16px;
-    }
-    ```
-
-## Summary
-
-This section covers the basics of using Flexbox for layout in CSS, creating and styling HTML forms, and the fundamentals of CSS including selectors, properties, and values. Each of these areas plays a vital role in creating effective and visually appealing web pages.
-
----
 
