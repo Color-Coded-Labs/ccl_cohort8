@@ -115,6 +115,7 @@ Example:
 ```javascript
 element.classList.add('new-class'); // Add a class
 element.classList.remove('old-class'); // Remove a class
+element.classList.toggle('class'); // Toggles a class
 ```
 ## Responding to User Interaction
 
