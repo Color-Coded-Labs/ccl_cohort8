@@ -174,39 +174,6 @@ Async/await in JavaScript offers a powerful and elegant solution to handle async
 #### Introduction to Express
 Express is a minimal and flexible Node.js web application framework that provides a robust set of features to build web and mobile applications. It is a popular choice for building RESTful APIs due to its simplicity and ease of use.
 
-#### Basics of Setting Up a Server with Express
-
-1. **Installing Express**:
-   - You need to have Node.js installed on your machine.
-   - Use the following command to install Express:
-     ```bash
-     npm install express
-     ```
-
-2. **Setting Up a Basic Express Server**:
-   - Create a file named `server.js` and add the following code to set up a basic Express server:
-     ```javascript
-     const express = require('express');
-     const app = express();
-     const port = 3000;
-
-     app.get('/', (req, res) => {
-       res.send('Hello World!');
-     });
-
-     app.listen(port, () => {
-       console.log(`Example app listening at http://localhost:${port}`);
-     });
-     ```
-
-3. **Running the Server**:
-   - Start the server by running the following command in your terminal:
-     ```bash
-     node server.js
-     ```
-
-#### Understanding Express Routing
-
 Routing refers to how an application’s endpoints (URIs) respond to client requests. In Express, routing is essential for handling different HTTP methods (GET, POST, PUT, DELETE).
 
 1. **Basic Routing**:
@@ -243,7 +210,6 @@ npm install express
 Create a file named `server.js` and add the following code:
 ```javascript
 const express = require("express");
-const axios = require("axios");
 const PORT = 3000;
 
 const app = express();
