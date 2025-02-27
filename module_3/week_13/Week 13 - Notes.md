@@ -203,6 +203,7 @@ Express.js is a minimal and flexible web application framework for Node.js. It s
 #### Installing Express
 Before using Express, ensure you have Node.js installed. Then, install Express with:
 ```bash
+npm init -y
 npm install express
 ```
 
