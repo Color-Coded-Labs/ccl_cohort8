@@ -76,79 +76,105 @@ Imagine NoSQL databases as a more free-form filing system, unlike the structured
 - **Flexibility**: NoSQL allows for a more flexible data model, which can evolve with your application's needs.
 - **Speed**: Some NoSQL types (like key-value stores) offer faster data retrieval by simplifying the data model and optimizing for specific operations.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Mongoose and MongoDB
 
-## 1. Setting up MongoDB Atlas
-- **MongoDB Atlas** is a cloud database service for hosting MongoDB databases, known for its high availability, global scalability, and robust security features.
-- **Setup Steps**:
-  1. **Create an Account and Cluster**: Sign up on MongoDB Atlas and create a cluster.
-  2. **Security Configuration**: Implement IP whitelisting and create database users.
-  3. **Connection String**: Obtain the connection string from MongoDB Atlas for application integration.
+1. Setting Up MongoDB Atlas
 
-## 2. Understanding Mongoose Schemas and Models
-- **Schema**: In Mongoose, a schema defines the structure of the data, specifying the fields and their types, default values, validators, etc. It's like a blueprint for how data is organized.
-- **Model**: A Mongoose model is a wrapper on the Mongoose schema. A Mongoose schema defines the structure of the document, default values, validators, etc., whereas a model provides an interface to the database for creating, querying, updating, deleting records, etc.
+MongoDB Atlas is a cloud-based database service that offers high availability, global scalability, and robust security features.
 
-## 3. Creating a Mongoose Model in a Separate File
-- **Purpose**: Models enable CRUD operations on documents within a MongoDB database.
-- **User Model Example (`user.model.js`)**:
-  ```javascript
-  const mongoose = require('mongoose');
+Steps:
+	1.	Create an Account and Cluster – Sign up on MongoDB Atlas and create a new cluster.
+	2.	Configure Security – Set up IP whitelisting and create a database user.
+	3.	Obtain Connection String – Retrieve the MongoDB connection string to use in the application.
 
-  const userSchema = new mongoose.Schema({
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-  });
+2. Installing Dependencies and Setting Up Environment Variables
 
-  const User = mongoose.model('User', userSchema);
-  export default User;
-  ```
+Before integrating MongoDB with our Node.js application, we need to install the required dependencies and configure environment variables.
 
-## 4. Setting up the Server and Connecting to MongoDB Atlas
-- **Server Configuration (`server.js`)**:
-  - Express server setup includes connecting to MongoDB Atlas using Mongoose.
-  - Use `MONGO_URI` environment variable for the database connection string. You can replace `process.env.MONGO_URI` with the connection string given on the MongoDB Atlas website.
-- **Server.js Code Example**:
-  ```javascript
-  const express = require('express');
-  const mongoose = require('mongoose');
-  const User = require('./user.model.js');
+Install Required Packages:
 
-  const app = express();
-  const PORT = process.env.PORT || 3000;
+npm install express mongoose dotenv bcryptjs
 
-  mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-      console.log('MongoDB connected');
-      app.listen(PORT, () => console.log(`App is listening to port: ${PORT}`));
-    })
-    .catch((err) => console.error(err));
-  ```
+	•	express: Framework for handling server routes.
+	•	mongoose: ODM (Object-Document Mapper) for MongoDB.
+	•	dotenv: Loads environment variables from a .env file.
+	•	bcryptjs: Used for hashing passwords.
 
-## 5. Integrating Models with Express Routes
+Creating the .env File:
+	1.	Create a .env file at the root of the project.
+	2.	Add the database connection string:
+```
+MONGO_URI=your_mongodb_connection_string_here
+PORT=3000
+```
 
-### Creating a User
+	3.	Load .env in server.js:
+```
+require('dotenv').config();
+```
+
+
+3. Understanding Mongoose Schemas and Models
+
+Mongoose provides a structured way to interact with MongoDB through schemas and models.
+	•	Schema: Defines the structure, field types, default values, and validations.
+	•	Model: A model wraps around a schema to allow CRUD operations.
+
+User Model Example (user.model.js):
 ```javascript
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+});
+
+const User = mongoose.model('User', userSchema);
+module.exports = User;
+```
+4. Setting Up the Server and Connecting to MongoDB Atlas
+
+server.js
+```javascript
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Connect to MongoDB Atlas
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('MongoDB connected');
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch((err) => console.error('MongoDB connection error:', err));
+```
+Key Points:
+	•	dotenv is required at the beginning to load environment variables.
+	•	The MONGO_URI is pulled from .env instead of being hardcoded.
+	•	The server only starts after a successful database connection.
+
+5. Integrating Models with Express Routes
+
+Now, we integrate the User model with Express routes.
+
+Creating a User (routes/userRoutes.js)
+```javascript
+const express = require('express');
+const bcrypt = require('bcryptjs');
+const User = require('../models/user.model');
+
+const router = express.Router();
+
 router.post("/register", async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -157,21 +183,24 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "Username already exists" });
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, password: hashedPassword });
-    await newUser.save();
 
-    res.status(200).json({ message: "User registered successfully" });
+    await newUser.save();
+    res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
-```
-**Explanation**: This route demonstrates the use of the User model to register a new user. It includes checking for existing users, hashing passwords, and saving the new user to the database.
 
-### Reading Users
+module.exports = router;
+```
+Explanation:
+	•	Checks if the username already exists.
+	•	Hashes the password before saving it.
+	•	Stores the user in the database.
+
+Fetching All Users
 ```javascript
 router.get("/users", async (req, res) => {
   try {
@@ -182,19 +211,18 @@ router.get("/users", async (req, res) => {
   }
 });
 ```
-**Explanation**: This route fetches all users from the database using the User model's `find` method.
-
-### Updating a User
+Updating a User
 ```javascript
 router.put("/users/:id", async (req, res) => {
   try {
-    const { id } = req.params;
     const { username, password } = req.body;
-
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    const updatedUser = await User.findByIdAndUpdate(id, { username, password: hashedPassword }, { new: true });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { username, password: hashedPassword },
+      { new: true }
+    );
 
     res.status(200).json(updatedUser);
   } catch (error) {
@@ -202,111 +230,40 @@ router.put("/users/:id", async (req, res) => {
   }
 });
 ```
-**Explanation**: This route updates an existing user's details in the database. It uses the `findByIdAndUpdate` method to modify the user document and return the updated user.
-
-### Deleting a User
+Deleting a User
 ```javascript
 router.delete("/users/:id", async (req, res) => {
   try {
-    const { id } = req.params;
-    await User.findByIdAndDelete(id);
+    await User.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 ```
-**Explanation**: This route deletes a user from the database using the `findByIdAndDelete` method.
+6. Bringing It All Together
 
-## Summary
-These notes cover the setup of MongoDB Atlas, the creation and use of Mongoose models and schemas, the setup of an Express server, and the integration of models with Express routes for database operations. This approach facilitates a modular and clean codebase, showcasing CRUD operations (Create, Read, Update, Delete) for effective data management in a Node.js environment.
-
-# Mongoose Operations and Explanations
-
-### Connecting to MongoDB
+Final server.js (Including Routes)
 ```javascript
-await mongoose.connect(uri, clientOptions);
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+
+const userRoutes = require('./routes/userRoutes');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json()); // Middleware to parse JSON
+app.use('/api', userRoutes); // Register user routes
+
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('MongoDB connected');
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch((err) => console.error('MongoDB connection error:', err));
 ```
-**Explanation**: This method establishes a connection to the MongoDB database using the provided URI and options.
-
-### Ping Command
-```javascript
-await mongoose.connection.db.admin().command({ ping: 1 });
-```
-**Explanation**: Sends a ping command to the database to check the connection.
-
-### Creating Schemas and Models
-```javascript
-const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  hashedPassword: { type: String, required: true },
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
-});
-
-const postSchema = new mongoose.Schema({
-  msg: { type: String, required: true },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
-});
-
-const User = mongoose.model('User', userSchema);
-const Post = mongoose.model('Post', postSchema);
-```
-**Explanation**: 
-- **Schema**: Defines the structure of documents in MongoDB, specifying the fields and their types, default values, validators, etc.
-- **Model**: A wrapper on the schema that provides an interface to interact with the database.
-
-### Saving Documents
-```javascript
-const newUser = new User({ username, hashedPassword });
-await newUser.save();
-```
-**Explanation**: Saves a new `User` document to the database.
-
-```javascript
-const newPost = new Post({ msg, user: user._id });
-await newPost.save();
-```
-**Explanation**: Saves a new `Post` document to the database.
-
-### Querying Documents
-```javascript
-const user = await User.findById(req.params.id).populate('posts');
-```
-**Explanation**: Finds a `User` document by its ID and populates the `posts` field with related `Post` documents.
-
-### Updating Documents
-```javascript
-const updatedUser = await User.findByIdAndUpdate(
-  req.params.id,
-  { username, hashedPassword },
-  { new: true, runValidators: true }
-);
-```
-**Explanation**: Updates a `User` document by its ID and returns the updated document. The `{ new: true, runValidators: true }` options ensure the returned document is the updated one and that validators are run.
-
-### Deleting Documents
-```javascript
-const deletedUser = await User.findByIdAndDelete(req.params.id);
-```
-**Explanation**: Deletes a `User` document by its ID.
-
-```javascript
-await Post.deleteMany({ user: req.params.id });
-```
-**Explanation**: Deletes multiple `Post` documents that match the specified condition (posts associated with a user ID).
-
-### Removing Documents
-```javascript
-const post = await Post.findById(req.params.id);
-await post.remove();
-```
-**Explanation**: Finds a `Post` document by its ID and removes it from the database.
-
-### Updating Nested Arrays
-```javascript
-await User.updateOne({ _id: post.user }, { $pull: { posts: post._id } });
-```
-**Explanation**: Updates a `User` document by removing a post ID from the `posts` array.
 
 
 # Common HTTP Status Codes for CRUD Operations
