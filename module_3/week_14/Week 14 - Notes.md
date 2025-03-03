@@ -83,32 +83,32 @@ Imagine NoSQL databases as a more free-form filing system, unlike the structured
 MongoDB Atlas is a cloud-based database service that offers high availability, global scalability, and robust security features.
 
 Steps:
-	1.	Create an Account and Cluster – Sign up on MongoDB Atlas and create a new cluster.
-	2.	Configure Security – Set up IP whitelisting and create a database user.
-	3.	Obtain Connection String – Retrieve the MongoDB connection string to use in the application.
+1. Create an Account and Cluster – Sign up on MongoDB Atlas and create a new cluster.
+2.	Configure Security – Set up IP whitelisting and create a database user.
+3.	Obtain Connection String – Retrieve the MongoDB connection string to use in the application.
 
 2. Installing Dependencies and Setting Up Environment Variables
 
 Before integrating MongoDB with our Node.js application, we need to install the required dependencies and configure environment variables.
 
 Install Required Packages:
-
+```
 npm install express mongoose dotenv bcryptjs
-
-	•	express: Framework for handling server routes.
-	•	mongoose: ODM (Object-Document Mapper) for MongoDB.
-	•	dotenv: Loads environment variables from a .env file.
-	•	bcryptjs: Used for hashing passwords.
+```
+- express: Framework for handling server routes.
+- mongoose: ODM (Object-Document Mapper) for MongoDB.
+- dotenv: Loads environment variables from a .env file.
+- bcryptjs: Used for hashing passwords.
 
 Creating the .env File:
-	1.	Create a .env file at the root of the project.
-	2.	Add the database connection string:
+1.	Create a .env file at the root of the project.
+2.	Add the database connection string:
 ```
 MONGO_URI=your_mongodb_connection_string_here
 PORT=3000
 ```
 
-	3.	Load .env in server.js:
+3.	Load .env in server.js:
 ```
 require('dotenv').config();
 ```
@@ -117,8 +117,8 @@ require('dotenv').config();
 3. Understanding Mongoose Schemas and Models
 
 Mongoose provides a structured way to interact with MongoDB through schemas and models.
-	•	Schema: Defines the structure, field types, default values, and validations.
-	•	Model: A model wraps around a schema to allow CRUD operations.
+- Schema: Defines the structure, field types, default values, and validations.
+- Model: A model wraps around a schema to allow CRUD operations.
 
 User Model Example (user.model.js):
 ```javascript
@@ -159,9 +159,9 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .catch((err) => console.error('MongoDB connection error:', err));
 ```
 Key Points:
-	•	dotenv is required at the beginning to load environment variables.
-	•	The MONGO_URI is pulled from .env instead of being hardcoded.
-	•	The server only starts after a successful database connection.
+- dotenv is required at the beginning to load environment variables.
+- The MONGO_URI is pulled from .env instead of being hardcoded.
+- The server only starts after a successful database connection.
 
 5. Integrating Models with Express Routes
 
